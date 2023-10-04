@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Order List</title>
+</head>
+<body>
+<h2>Order List</h2>
+<form th:action="@{/filter-orders}" method="post">
+  <label>Filter by Customer:</label>
+  <select name="customerCode">
+    <option value="">All Customers</option>
+    <option th:each="customer : ${customers}" th:value="${customer.code}" th:text="${customer.name}"></option>
+  </select>
+  <input type="submit" value="Filter"/>
+</form>
+
+<table border="1">
+  <tr>
+    <th>Id</th>
+    <th>Date</th>
+    <th>Product Name</th>
+    <th>Price</th>
+    <th>Quantity</th>
+  </tr>
+  <tr th:each="order : ${orders}">
+    <td th:text="${order.id}"></td>
+    <td th:text="${order.ordersDate}"></td>
+    <td th:text="${order.productName}"></td>
+    <td th:text="${order.price}"></td>
+    <td th:text="${order.quantity}"></td>
+  </tr>
+</table>
+
+<a th:href="@{/create-order}">Create Order</a>
+</body>
+</html>
